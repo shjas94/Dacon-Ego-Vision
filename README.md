@@ -58,5 +58,5 @@ $ python ensemble.py
 ```
 
 # Collaborators
-* shjas94(허재섭)
-* chanyub(신찬엽)
+* [shjas94](https://github.com/shjas94)(허재섭)
+* [chanyub](https://github.com/chanyub)(신찬엽)
