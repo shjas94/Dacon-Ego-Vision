@@ -1,0 +1,21 @@
+.
+├── DATA
+├── README.md
+├── config
+│   ├── cfg1.yml
+│   └── cfg2.yml
+├── dirstructure.txt
+├── ensemble.py
+├── inference.py
+├── models
+├── modules
+│   ├── dataset.py
+│   ├── losses.py
+│   ├── models.py
+│   ├── optimizers.py
+│   ├── schedulers.py
+│   └── utils.py
+├── submissions
+└── train.py
+
+5 directories, 13 files

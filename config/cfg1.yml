@@ -1,0 +1,29 @@
+PATH:
+  DATA: "/content/DATA"
+  SAVE: "/content/models"
+MODEL:
+  MODEL_NAME: "EffNet"
+  WEIGHT_NAME: "tf_efficientnet_b7_ns"
+TRAIN:
+  RESUME_TRAIN: False
+  IMG_SIZE: [384, 384]
+  TRAIN_IMG_PADDING: 50
+  TEST_IMG_PADDING: 10
+  EPOCH: 200
+  TRAIN_BATCH_SIZE: 8
+  VAL_BATCH_SIZE: 1
+  TEST_BATCH_SIZE: 1
+  LR: 1e-04
+  OPTIMIZER: "radam"
+  MULTI_CRITERION: True
+  CRITERION1: "ce"
+  CRITERION2: "focal"
+  GAMMA: 2.0
+  WEIGHT_DECAY: 1e-08
+  SEED: 42
+  MIXUP: True
+  ALPHA: 0.5
+  SCHEDULER: null
+  PATIENCE: 15
+  SUBMISSION_NAME: "Model1.csv"
+  RUN_NAME: "EffNetB7_NS"
