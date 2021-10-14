@@ -3,7 +3,7 @@ PATH:
   SAVE: "/content/models"
 MODEL:
   MODEL_NAME: "Swin"
-  WEIGHT_NAME: "swin_base_patch4_window12_384"
+  WEIGHT_NAME: "swin_large_patch4_window12_384"
 TRAIN:
   RESUME_TRAIN: False
   IMG_SIZE: [384, 384]
