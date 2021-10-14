@@ -5,12 +5,12 @@
 * Overall Solution
 * Code Structure
 * How To Train & Inference
-
+* Collaborators
 # Overall Solution
 
 ![pic2](https://user-images.githubusercontent.com/25663769/137305744-efacd02c-23a7-48ae-a222-04b0a4841ff8.png)
 
-* EfficinetNetB7과 Swin-Large 모델을 앙상블
+* EfficientNetB7과 Swin-Large 모델을 앙상블
 * Augmentation으로는 Mixup, Rotate, RandomBrightnessContrast, CoarseDropout을 사용
 
 # Code Structure
@@ -56,3 +56,7 @@ $ python inference.py --config cfg2.yml
 ```
 $ python ensemble.py
 ```
+
+# Collaborators
+* shjas94(허재섭)
+* chanyub(신찬엽)
