@@ -1,18 +1,18 @@
 PATH:
   DATA: "/content/DATA"
-  SAVE: "/content/models"
+  SAVE: "./models"
 MODEL:
   MODEL_NAME: "Swin"
   WEIGHT_NAME: "swin_large_patch4_window12_384"
-TRAIN:
-  RESUME_TRAIN: False
+DATA:
   IMG_SIZE: [384, 384]
   TRAIN_IMG_PADDING: 80
   TEST_IMG_PADDING: 10
+TRAIN:
+  RESUME_TRAIN: False
   EPOCH: 200
-  TRAIN_BATCH_SIZE: 8
+  BATCH_SIZE: 8
   VAL_BATCH_SIZE: 4
-  TEST_BATCH_SIZE: 1
   LR: 1e-04
   OPTIMIZER: "radam"
   MULTI_CRITERION: True
@@ -25,5 +25,7 @@ TRAIN:
   ALPHA: 0.5
   SCHEDULER: null
   PATIENCE: 15
-  SUBMISSION_NAME: "Model2.csv"
   RUN_NAME: "Swin_Base"
+INFERENCE:
+  SUBMISSION_NAME: "Model2.csv"
+  BATCH_SIZE: 1

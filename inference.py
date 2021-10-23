@@ -27,12 +27,11 @@ def inference(cfg, model_path):
     transforms = A.Compose([
                            ToTensorV2(p=1.0)
                            ])
-
     test_set = EvTestDataset(
-        test_df, cfg['TRAIN']['IMG_SIZE'], img_padding=cfg['TRAIN']['TEST_IMG_PADDING'], transforms=transforms)
+        test_df, cfg['DATA']['IMG_SIZE'], img_padding=cfg['INFERENCE']['TEST_IMG_PADDING'], transforms=transforms)
     test_loader = DataLoader(
         test_set,
-        batch_size=cfg['TRAIN']['TEST_BATCH_SIZE'],
+        batch_size=cfg['INFERENCE']['BATCH_SIZE'],
         num_workers=3,
         shuffle=False,
         pin_memory=use_cuda,
@@ -48,8 +47,7 @@ def inference(cfg, model_path):
             images = images.to(device)
             probs = model(images)
             probs = probs.cpu().detach().numpy()
-
-            batch_index = cfg['TRAIN']['TEST_BATCH_SIZE'] * idx
+            batch_index = cfg['INFERENCE']['BATCH_SIZE'] * idx
             prediction_array[batch_index: batch_index + images.shape[0], :]\
                 = probs
     return prediction_array
@@ -93,4 +91,4 @@ if __name__ == "__main__":
         prediction_arrays.append(inference(cfg, m))
     submission = k_fold_ensemble(cfg, prediction_arrays)
     submission.to_csv(os.path.join(
-        os.getcwd(), 'submissions', cfg['TRAIN']['SUBMISSION_NAME']), index=False)
+        os.getcwd(), 'submissions', cfg['INFERENCE']['SUBMISSION_NAME']), index=False)

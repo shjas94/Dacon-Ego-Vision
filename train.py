@@ -91,14 +91,14 @@ def train(cfg, train_path, val_path, excluded, fold_num):
         A.CoarseDropout(max_height=10, max_width=10, p=0.5)
     ])
 
-    train_set = EvDataset(transforms=transforms, img_size=cfg['TRAIN']['IMG_SIZE'],
-                          augmentations=augmentations, root=cfg['PATH']['DATA'], paths=train_path, additional=excluded, img_padding=cfg['TRAIN']['TRAIN_IMG_PADDING'], mode='train')
+    train_set = EvDataset(transforms=transforms, img_size=cfg['DATA']['IMG_SIZE'],
+                          augmentations=augmentations, root=cfg['PATH']['DATA'], paths=train_path, additional=excluded, img_padding=cfg['DATA']['TRAIN_IMG_PADDING'], mode='train')
     val_set = EvDataset(transforms=transforms, root=cfg['PATH']['DATA'],
-                        img_size=cfg['TRAIN']['IMG_SIZE'], paths=val_path, additional=excluded, img_padding=cfg['TRAIN']['TEST_IMG_PADDING'], mode='valid')
+                        img_size=cfg['DATA']['IMG_SIZE'], paths=val_path, additional=excluded, img_padding=cfg['DATA']['TEST_IMG_PADDING'], mode='valid')
 
     train_loader = DataLoader(
         train_set,
-        batch_size=cfg['TRAIN']['TRAIN_BATCH_SIZE'],
+        batch_size=cfg['TRAIN']['BATCH_SIZE'],
         num_workers=3,
         shuffle=True,
         pin_memory=use_cuda,
@@ -251,9 +251,13 @@ def train(cfg, train_path, val_path, excluded, fold_num):
         if early_stopping.early_stop:
             print("stopped Earlier than Expected!!!!!!!!!!!!")
             save_dir = cfg['PATH']['SAVE']
-            model_name = cfg['TRAIN']['MODEL_NAME']
+            run_name = cfg['TRAIN']['RUN_NAME']
+
+            if not os.path.exists(os.path.join(save_dir, run_name)):
+                os.mkdir(os.path.join(save_dir, run_name))
+            save_path = os.path.join(save_dir, run_name) + '/'
             torch.save(
-                best_model, f'{save_dir}_{model_name}_{fold_num}_{best_valid_loss:2.4f}_epoch_{best_epoch}.pth')
+                best_model, f'{save_path}_{fold_num}_{best_valid_loss:2.4f}_epoch_{best_epoch}.pth')
             wandb.join()
             break
         if best_valid_loss > valid_loss:
@@ -267,9 +271,13 @@ def train(cfg, train_path, val_path, excluded, fold_num):
             scheduler.step()
 
     save_dir = cfg['PATH']['SAVE']
-    model_name = cfg['TRAIN']['MODEL_NAME']
+    run_name = cfg['TRAIN']['RUN_NAME']
+
+    if not os.path.exists(os.path.join(save_dir, run_name)):
+        os.mkdir(os.path.join(save_dir, run_name))
+    save_path = os.path.join(save_dir, run_name) + '/'
     torch.save(
-        best_model, f'{save_dir}_{model_name}_{fold_num}_{best_valid_loss:2.4f}_epoch_{best_epoch}.pth')
+        best_model, f'{save_path}_{fold_num}_{best_valid_loss:2.4f}_epoch_{best_epoch}.pth')
     wandb.join()
     return best_model
 

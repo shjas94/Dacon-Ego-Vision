@@ -1,18 +1,18 @@
 PATH:
   DATA: "/content/DATA"
-  SAVE: "/content/models"
+  SAVE: "./models"
 MODEL:
   MODEL_NAME: "EffNet"
   WEIGHT_NAME: "tf_efficientnet_b7_ns"
-TRAIN:
-  RESUME_TRAIN: False
+DATA:
   IMG_SIZE: [384, 384]
   TRAIN_IMG_PADDING: 50
   TEST_IMG_PADDING: 10
+TRAIN:
+  RESUME_TRAIN: False
   EPOCH: 200
-  TRAIN_BATCH_SIZE: 8
+  BATCH_SIZE: 8
   VAL_BATCH_SIZE: 1
-  TEST_BATCH_SIZE: 1
   LR: 1e-04
   OPTIMIZER: "radam"
   MULTI_CRITERION: True
@@ -25,5 +25,7 @@ TRAIN:
   ALPHA: 0.5
   SCHEDULER: null
   PATIENCE: 15
-  SUBMISSION_NAME: "Model1.csv"
   RUN_NAME: "EffNetB7_NS"
+INFERENCE:
+  SUBMISSION_NAME: "Model1.csv"
+  BATCH_SIZE: 1
